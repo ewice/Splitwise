@@ -1,1 +1,9 @@
-<p>users works!</p>
+<div class="d-flex justify-content-between mb-5">
+  <h1>Users</h1>
+  <button class="btn btn-secondary" (click)="onOpenDialogClicked()">+ Add user</button>
+</div>
+<div class="card mb-4" *ngFor="let user of userService.getAllUsers()">
+  <div class="card-body">
+    <h5 class="card-title">{{ user.name }}</h5>
+  </div>
+</div>

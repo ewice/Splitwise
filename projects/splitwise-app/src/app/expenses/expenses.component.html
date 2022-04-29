@@ -1,1 +1,13 @@
-<p>expenses works!</p>
+<div class="d-flex justify-content-between mb-5">
+  <h1>Expenses</h1>
+</div>
+<ng-container *ngIf="groupId">
+<div class="card mb-4" *ngFor="let expense of expenseService.getAllExpensesByGroupId(groupId)">
+  <div class="card-body">
+    <h5 class="card-title">{{ expense.name }}</h5>
+    <p class="card-text">{{ expense.date }}</p>
+    <p class="card-text">Amount: {{ expense.amount }}</p>
+    <p class="card-text">Paid by {{ expense.paidByUser }}</p>
+  </div>
+</div>
+</ng-container>
