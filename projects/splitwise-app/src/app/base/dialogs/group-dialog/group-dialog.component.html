@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+  <h2 mat-dialog-title>Create a group</h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="mb-3">
+      <label for="groupName" class="form-label">Group name</label>
+      <input type="text" class="form-control" id="groupName" formControlName="name">
+    </div>
+    <div class="mb-3">
+      <label for="user" class="form-label">User</label>
+      <select class="form-select" id="user" multiple formControlName="userIds">
+        <option
+          *ngFor="let user of userService.getAllUsers()"
+          [value]="user.id">
+          {{ user.name }}
+        </option>
+      </select>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close="true">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="onSaveClicked(form.value)">Save</button>
+  </mat-dialog-actions>
+</form>
+

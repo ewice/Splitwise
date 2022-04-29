@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <h2 mat-dialog-title>Create a user</h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="mb-3">
+      <label for="name" class="form-label">User name</label>
+      <input type="text" class="form-control" id="name" formControlName="name"
+             [class.is-invalid]="name.touched && name.invalid">
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close="true">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="onSaveClicked(form.value)">Save</button>
+  </mat-dialog-actions>
+</form>
+
