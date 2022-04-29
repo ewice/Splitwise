@@ -1,7 +1,21 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import "styles/variables";
 
-$grey: #D8D8D8;
-$green: #1DC29F;
+//-----------------------------------------------------
+//-----------------------------------------------------
+
+// start general
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// end general
 
 //-----------------------------------------------------
 //-----------------------------------------------------
@@ -31,10 +45,14 @@ $green: #1DC29F;
   color: $green;
   font-weight: bold;
 
-  &:hover {
+  &:hover, &:active, &:focus {
     background-color: $green;
     border: 2px solid $green;
     color: white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba($green, 0.4);
   }
 }
 
@@ -47,6 +65,7 @@ $green: #1DC29F;
 
 .card {
   border-radius: 10px;
+
   .card-body {
     padding: 2rem 3rem;
   }
@@ -54,5 +73,17 @@ $green: #1DC29F;
 
 // end card
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//-----------------------------------------------------
+//-----------------------------------------------------
+
+// start dialog
+
+.mat-dialog-container {
+  border-radius: 10px;
+}
+
+.cdk-overlay-pane {
+  width: 500px;
+}
+
+// end dialog
