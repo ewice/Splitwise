@@ -1,0 +1,21 @@
+@import "projects/splitwise-app/src/styles/variables";
+
+#logo {
+  height: 7rem;
+}
+
+ul {
+  list-style-type: none;
+  li {
+    padding: 2rem 0;
+  }
+  a {
+    color: $dark-grey;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+
+  .active {
+    color: $green;
+  }
+}
