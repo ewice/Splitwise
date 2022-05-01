@@ -9,7 +9,6 @@
     <ul>
       <li *ngFor="let user of group.users">{{ user.name }}</li>
     </ul>
-    <a [routerLink]="['/groups', group.id, 'balances']">View all balances</a>
-    <a [routerLink]="['/groups', group.id, 'expenses']">View all expenses</a>
+    <a [routerLink]="['/groups', group.id, 'expenses']">View details</a>
   </div>
 </div>

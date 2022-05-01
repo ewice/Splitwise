@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GroupInterface, GroupService } from 'splitwise';
+import { GroupService } from 'splitwise';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupDialogComponent } from '../base/dialogs/group-dialog/group-dialog.component';
 
@@ -9,8 +9,6 @@ import { GroupDialogComponent } from '../base/dialogs/group-dialog/group-dialog.
     styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
-    groups: GroupInterface[] | undefined;
-
     constructor(public groupService: GroupService, private dialog: MatDialog) {}
 
     onOpenDialogClicked(): void {

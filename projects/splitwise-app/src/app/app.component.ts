@@ -21,11 +21,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.addUsers();
-        this.addGroup();
-        this.addGroup();
-        this.addGroup();
+        this.addGroups();
         this.addExpenses();
-        // this.addPayment();
+        this.addPayment();
     }
 
     addUsers(): void {
@@ -40,7 +38,15 @@ export class AppComponent implements OnInit {
         });
     }
 
-    addGroup(): void {
+    addGroups(): void {
+        this.groupService.createGroup({
+            name: 'Test' + this.index++,
+            userIds: [1, 2, 3]
+        });
+        this.groupService.createGroup({
+            name: 'Test' + this.index++,
+            userIds: [1, 2, 3]
+        });
         this.groupService.createGroup({
             name: 'Test' + this.index++,
             userIds: [1, 2, 3]

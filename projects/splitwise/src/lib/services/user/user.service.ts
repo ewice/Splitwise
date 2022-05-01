@@ -26,9 +26,4 @@ export class UserService {
     getAllUsersByIds(userIds: number[]): UserInterface[] {
         return this.users.filter(user => userIds.some(userId => user.id === userId));
     }
-
-    getUserAmountByGroupIdAndUserId(groupId: number, userId: number): UserInterface | undefined {
-        // TODO calculation
-        return undefined;
-    }
 }

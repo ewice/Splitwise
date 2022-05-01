@@ -13,11 +13,20 @@ export class PaymentService {
 
     createPayment(payment: PaymentInterface): void {
         payment.id = this.index++;
+        payment.date = new Date();
+        payment.paidUser = undefined;
+        payment.paidByUser = undefined;
         this.payments.push(payment);
     }
 
     getAllPaymentsByGroupId(groupId: number): PaymentInterface[] {
-        return this.payments.filter(payment => payment.groupId === groupId);
+        return this.payments
+            .filter(payment => payment.groupId === groupId)
+            .map(payment => ({
+                ...payment,
+                paidUser: this.userService.getUser(payment.paidUserId),
+                paidByUser: this.userService.getUser(payment.paidByUserId)
+            }));
     }
 
     getAllPaymentsByUserId(userId: number): PaymentInterface[] {

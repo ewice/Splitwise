@@ -1,0 +1,53 @@
+<form [formGroup]="form">
+  <h2 mat-dialog-title>Create a group</h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="amount" formControlName="amount"
+             [class.is-invalid]="amount.touched && amount.invalid">
+    </div>
+    <div class="mb-3">
+      <label for="paidUser" class="form-label">Paid by</label>
+      <select id="paidUser"
+              class="form-select"
+              formControlName="paidUserId"
+              [class.is-invalid]="paidByUserId.touched && paidByUserId.invalid">
+        <ng-container *ngIf="group?.users?.length > 0; else noUsers">
+          <option [value]="null" disabled selected>Select user</option>
+          <option
+            *ngFor="let user of group.users"
+            [value]="user.id">
+            {{ user.name }}
+          </option>
+        </ng-container>
+        <ng-template #noUsers>
+          <option [value]="null" disabled selected>No users</option>
+        </ng-template>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="paidByUser" class="form-label">Paid by</label>
+      <select id="paidByUser"
+              class="form-select"
+              formControlName="paidByUserId"
+              [class.is-invalid]="paidByUserId.touched && paidByUserId.invalid">
+        <ng-container *ngIf="group?.users?.length > 0; else noUsers">
+          <option [value]="null" disabled selected>Select user</option>
+            <option
+              *ngFor="let user of group.users"
+              [value]="user.id">
+              {{ user.name }}
+            </option>
+        </ng-container>
+        <ng-template #noUsers>
+          <option [value]="null" disabled selected>No users</option>
+        </ng-template>
+      </select>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close="true">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="onSaveClicked(form.value)">Save</button>
+  </mat-dialog-actions>
+</form>
+

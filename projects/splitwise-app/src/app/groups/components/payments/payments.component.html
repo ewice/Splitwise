@@ -1,1 +1,16 @@
-<p>payments works!</p>
+<div class="d-flex justify-content-between mb-5">
+  <h1>Payment</h1>
+  <button class="btn btn-secondary" (click)="onOpenDialogClicked()">+ Add payment</button>
+</div>
+<ng-container *ngIf="groupId">
+  <div class="card mb-4" *ngFor="let payment of paymentService.getAllPaymentsByGroupId(groupId).reverse()">
+    <div class="card-body">
+      <p class="card-text">
+        <span class="fw-bold">{{ payment.paidByUser?.name }}</span> paid
+        <span class="fw-bold">{{ payment.paidUser?.name }}</span> on
+        <span class="fw-bold">{{ dateService.formatDate(payment.date) }}</span>
+        <span class="color-green fw-bold ms-3">{{ payment.amount }}€</span>
+      </p>
+    </div>
+  </div>
+</ng-container>

@@ -4,18 +4,22 @@ import { GroupService } from '../group/group.service';
 import { PaymentService } from '../payment/payment.service';
 import { UserService } from '../user/user.service';
 import { UserInterface } from '../../types/user.interface';
-import { VerticeInterface } from '../../types/vertice.Interface';
+import { VerticeInterface } from '../../types/vertice.interface';
 import { BalanceInterface } from '../../types/balance.interface';
-import { DebtInterface } from '../../types/debtInterface';
+import { DebtInterface } from '../../types/debt.interface';
+import { ExpenseInterface } from '../../types/expense.interface';
+import { PaymentInterface } from '../../types/payment.interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BalanceService {
-    balances: BalanceInterface[] = [];
-    vertices: VerticeInterface[] = [];
-    debts: DebtInterface[] = [];
-    users: UserInterface[] | undefined;
+    private balances: BalanceInterface[] = [];
+    private debts: DebtInterface[] = [];
+    private expenses: ExpenseInterface[] = [];
+    private payments: PaymentInterface[] = [];
+    private vertices: VerticeInterface[] = [];
+    private users: UserInterface[] | undefined;
 
     constructor(
         private expenseService: ExpenseService,
@@ -26,28 +30,13 @@ export class BalanceService {
 
     getAllBalances(groupId: number): BalanceInterface[] {
         this.resetArrays();
+        this.expenses = this.expenseService.getAllExpensesByGroupId(groupId);
+        this.payments = this.paymentService.getAllPaymentsByGroupId(groupId);
         this.users = this.groupService.getGroupById(groupId)?.users;
-
-        const expenses = this.expenseService.getAllExpensesByGroupId(groupId);
-        const payments = this.paymentService.getAllPaymentsByGroupId(groupId);
 
         if (this.users && this.users.length > 0) {
             this.setInitialVertices();
-
-            this.users.forEach(user => {
-                expenses.forEach(expense => {
-                    if (user.id && expense.paidByUserId !== user.id) {
-                        // @ts-ignore
-                        const amount = (1 / this.users.length) * expense.amount;
-                        this.addVertice(expense.paidByUserId, user.id, amount);
-                    }
-                });
-            });
-
-            payments.forEach(payments => {
-                this.addVertice(payments.paidByUserId, payments.paidUserId, payments.amount);
-            });
-
+            this.createVertices();
             this.getDepts();
             this.createBalances();
         }
@@ -58,6 +47,21 @@ export class BalanceService {
     private addVertice(by: number, to: number, amount: number): void {
         const verticeIndex = this.vertices.findIndex(vertice => vertice.by === by && vertice.to === to);
         verticeIndex !== -1 ? (this.vertices[verticeIndex].amount += amount) : this.vertices.push({ to, by, amount });
+    }
+
+    private createVertices(): void {
+        this.users.forEach(user => {
+            this.expenses.forEach(expense => {
+                if (user.id && expense.paidByUserId !== user.id) {
+                    const amount = (1 / this.users.length) * expense.amount;
+                    this.addVertice(expense.paidByUserId, user.id, amount);
+                }
+            });
+        });
+
+        this.payments.forEach(payments => {
+            this.addVertice(payments.paidByUserId, payments.paidUserId, payments.amount);
+        });
     }
 
     private findVertice(by: number | undefined, to: number | undefined): VerticeInterface | undefined {
@@ -124,7 +128,9 @@ export class BalanceService {
 
     private resetArrays(): void {
         this.balances = [];
-        this.vertices = [];
         this.debts = [];
+        this.expenses = [];
+        this.payments = [];
+        this.vertices = [];
     }
 }

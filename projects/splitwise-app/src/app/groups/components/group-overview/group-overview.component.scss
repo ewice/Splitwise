@@ -1,0 +1,16 @@
+@import "projects/splitwise-app/src/styles/variables";
+
+.group-menu {
+  color: black;
+  background: white;
+  border: 1px solid $green;
+  a {
+    padding: 1rem 0;
+    border-right: 1px solid $green;
+  }
+
+  .active, a:hover {
+    background-color: $green;
+    color: white;
+  }
+}

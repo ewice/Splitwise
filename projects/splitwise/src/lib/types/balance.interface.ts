@@ -1,5 +1,5 @@
 import { UserInterface } from './user.interface';
-import { DebtInterface } from './debtInterface';
+import { DebtInterface } from './debt.interface';
 
 export interface BalanceInterface {
     user: UserInterface | undefined;

@@ -14,10 +14,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {GroupDialogComponent} from './base/dialogs/group-dialog/group-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import { SubMenuComponent } from './base/menus/sub-menu/sub-menu.component';
-import { ExpenseDialogComponent } from './base/dialogs/expense-dialog/expense-dialog.component';
-import { UserDialogComponent } from './base/dialogs/user-dialog/user-dialog.component';
-import { BalanceComponent } from './groups/components/balance/balance.component';
+import {SubMenuComponent} from './base/menus/sub-menu/sub-menu.component';
+import {ExpenseDialogComponent} from './base/dialogs/expense-dialog/expense-dialog.component';
+import {UserDialogComponent} from './base/dialogs/user-dialog/user-dialog.component';
+import {BalanceComponent} from './groups/components/balance/balance.component';
+import {GroupOverviewComponent} from './groups/components/group-overview/group-overview.component';
+import {PaymentDialogComponent} from './base/dialogs/payment-dialog/payment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { BalanceComponent } from './groups/components/balance/balance.component'
     SubMenuComponent,
     ExpenseDialogComponent,
     UserDialogComponent,
-    BalanceComponent
+    BalanceComponent,
+    GroupOverviewComponent,
+    PaymentDialogComponent
   ],
   imports: [
     BrowserModule,

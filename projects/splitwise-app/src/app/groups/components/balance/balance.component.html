@@ -1,3 +1,19 @@
+<div class="d-flex justify-content-between mb-5">
+  <h1>Balances</h1>
+  <button class="btn btn-secondary" (click)="onOpenDialogClicked()">+ Add payment</button>
+</div>
 <ng-container *ngIf="groupId">
-  <div *ngFor="let balance of balanceService.getAllBalances(groupId)"></div>
+  <div class="card mb-4" *ngFor="let balance of balanceService.getAllBalances(groupId)">
+    <div class="card-body">
+      <p class="card-text">
+        <span class="fw-bold">{{ balance.user?.name }}</span>
+      </p>
+      <ul>
+        <li *ngFor="let debt of balance.debts">
+          {{ debt.to?.name }}
+          <span class="color-red fw-bold ms-3">{{ debt.amount }}€</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </ng-container>

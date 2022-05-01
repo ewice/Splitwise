@@ -14,6 +14,7 @@ export class ExpenseService {
     createExpense(expense: ExpenseInterface): void {
         expense.id = this.index++;
         expense.date = new Date();
+        expense.paidByUser = undefined;
         this.expenses.push(expense);
     }
 
