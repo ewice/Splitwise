@@ -13,8 +13,7 @@
     </div>
     <div class="mb-3">
       <label for="group" class="form-label">Group</label>
-      <select *ngIf="groups"
-              id="group"
+      <select id="group"
               class="form-select"
               formControlName="groupId"
               [class.is-invalid]="groupId.touched && groupId.invalid">
@@ -22,7 +21,7 @@
           <option [value]="null" [disabled]="true" selected>Select group</option>
           <option
             *ngFor="let group of groups"
-            [value]="group.id">
+          [value]="group.id">
             {{ group.name }}
           </option>
         </ng-container>
@@ -35,8 +34,8 @@
       <label for="user" class="form-label">Paid by</label>
       <select id="user"
               class="form-select"
-              formControlName="userId"
-              [class.is-invalid]="userId.touched && userId.invalid">
+              formControlName="paidByUserId"
+              [class.is-invalid]="paidByUserId.touched && paidByUserId.invalid">
         <ng-container *ngIf="users; else noUsers">
           <option [value]="null" disabled selected>Select user</option>
           <option

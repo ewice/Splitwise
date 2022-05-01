@@ -2,10 +2,14 @@
   <h1>Groups</h1>
   <button class="btn btn-secondary" (click)="onOpenDialogClicked()">+ Add group</button>
 </div>
-<div class="card mb-4" *ngFor="let group of (groupService.getAllGroups() | async)">
+<div class="card mb-4" *ngFor="let group of groupService.getAllGroups()">
   <div class="card-body">
     <h5 class="card-title">{{ group.name }}</h5>
-    <p class="card-text"><span *ngFor="let user of group.users">{{ user.name }}, </span></p>
-    <a [routerLink]="['/expenses', group.id]">View all expenses</a>
+    <p class="card-text m-0">Users:</p>
+    <ul>
+      <li *ngFor="let user of group.users">{{ user.name }}</li>
+    </ul>
+    <a [routerLink]="['/groups', group.id, 'balances']">View all balances</a>
+    <a [routerLink]="['/groups', group.id, 'expenses']">View all expenses</a>
   </div>
 </div>

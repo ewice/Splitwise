@@ -15,15 +15,24 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  color: $green;
+  text-decoration: none;
+}
+
 // end general
 
 //-----------------------------------------------------
 //-----------------------------------------------------
 
-// start background
+// start background, color
 
 .bg-grey {
   background-color: $grey;
+}
+
+.color-green {
+  color: $green;
 }
 
 // end background

@@ -1,0 +1,3 @@
+<ng-container *ngIf="groupId">
+  <div *ngFor="let balance of balanceService.getAllBalances(groupId)"></div>
+</ng-container>

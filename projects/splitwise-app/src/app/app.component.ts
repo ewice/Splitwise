@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService, UserService } from 'splitwise';
+import { ExpenseService, GroupService, PaymentService, UserService } from 'splitwise';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -11,13 +11,21 @@ export class AppComponent implements OnInit {
     index = 1;
     title = 'splitwise-app';
 
-    constructor(public groupService: GroupService, private dialog: MatDialog, private userService: UserService) {}
+    constructor(
+        public groupService: GroupService,
+        private dialog: MatDialog,
+        private userService: UserService,
+        private expenseService: ExpenseService,
+        private paymentService: PaymentService
+    ) {}
 
     ngOnInit(): void {
         this.addUsers();
         this.addGroup();
         this.addGroup();
         this.addGroup();
+        this.addExpenses();
+        // this.addPayment();
     }
 
     addUsers(): void {
@@ -27,12 +35,39 @@ export class AppComponent implements OnInit {
         this.userService.createUser({
             name: 'Nils'
         });
+        this.userService.createUser({
+            name: 'Peter'
+        });
     }
 
     addGroup(): void {
         this.groupService.createGroup({
             name: 'Test' + this.index++,
-            userIds: [1, 2]
+            userIds: [1, 2, 3]
+        });
+    }
+
+    addExpenses(): void {
+        this.expenseService.createExpense({
+            amount: 12,
+            name: 'Expense1',
+            groupId: 1,
+            paidByUserId: 1
+        });
+        this.expenseService.createExpense({
+            amount: 18,
+            name: 'Expense2',
+            groupId: 1,
+            paidByUserId: 2
+        });
+    }
+
+    addPayment(): void {
+        this.paymentService.createPayment({
+            amount: 6,
+            groupId: 1,
+            paidUserId: 1,
+            paidByUserId: 2
         });
     }
 }

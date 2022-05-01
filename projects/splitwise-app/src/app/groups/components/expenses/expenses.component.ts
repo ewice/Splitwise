@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseService } from 'splitwise';
 import { ActivatedRoute } from '@angular/router';
+import { ExpenseService, ExpenseInterface } from 'splitwise';
+import { format } from 'date-fns';
 
 @Component({
     selector: 'app-expenses',
@@ -15,7 +16,10 @@ export class ExpensesComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.subscribe(params => {
             this.groupId = +params['id'];
-            console.log(this.expenseService.getAllExpensesByGroupId(this.groupId));
         });
+    }
+
+    formatDate(expense: ExpenseInterface): string | undefined {
+        return expense.date ? format(expense.date, 'dd MMM') : undefined;
     }
 }

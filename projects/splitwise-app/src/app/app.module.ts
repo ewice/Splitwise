@@ -5,8 +5,8 @@ import {SplitwiseModule} from "splitwise";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {GroupsComponent} from './groups/groups.component';
-import {ExpensesComponent} from './expenses/expenses.component';
-import {PaymentsComponent} from './payments/payments.component';
+import {ExpensesComponent} from './groups/components/expenses/expenses.component';
+import {PaymentsComponent} from './groups/components/payments/payments.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MenuComponent} from './base/menus/menu/menu.component';
 import {UsersComponent} from './users/users.component';
@@ -17,6 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { SubMenuComponent } from './base/menus/sub-menu/sub-menu.component';
 import { ExpenseDialogComponent } from './base/dialogs/expense-dialog/expense-dialog.component';
 import { UserDialogComponent } from './base/dialogs/user-dialog/user-dialog.component';
+import { BalanceComponent } from './groups/components/balance/balance.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserDialogComponent } from './base/dialogs/user-dialog/user-dialog.comp
     GroupDialogComponent,
     SubMenuComponent,
     ExpenseDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    BalanceComponent
   ],
   imports: [
     BrowserModule,

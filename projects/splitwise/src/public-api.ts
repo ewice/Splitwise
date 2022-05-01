@@ -3,6 +3,7 @@
  */
 
 export * from './lib/splitwise.module';
+export * from './lib/services/balance/balance.service';
 export * from './lib/services/expense/expense.service';
 export * from './lib/services/group/group.service';
 export * from './lib/services/payment/payment.service';

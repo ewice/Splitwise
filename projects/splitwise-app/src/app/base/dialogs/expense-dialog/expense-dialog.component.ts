@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExpenseInterface, ExpenseService, GroupInterface, GroupService, UserInterface, UserService } from 'splitwise';
 import { MatDialogRef } from '@angular/material/dialog';
-import { switchMap } from 'rxjs';
+import { GroupService, UserService, ExpenseService, GroupInterface, UserInterface, ExpenseInterface } from 'splitwise';
 
 @Component({
     selector: 'app-expense-dialog',
@@ -10,14 +9,14 @@ import { switchMap } from 'rxjs';
     styleUrls: ['./expense-dialog.component.scss']
 })
 export class ExpenseDialogComponent implements OnInit {
-    groups: GroupInterface[] | undefined;
+    groups: GroupInterface[];
     users: UserInterface[] | undefined;
 
     form = new FormGroup({
         name: new FormControl(null, Validators.required),
         amount: new FormControl(null, Validators.required),
         groupId: new FormControl(null, Validators.required),
-        userId: new FormControl({ value: null, disabled: true }, Validators.required)
+        paidByUserId: new FormControl({ value: null, disabled: true }, Validators.required)
     });
 
     get name(): AbstractControl {
@@ -32,8 +31,8 @@ export class ExpenseDialogComponent implements OnInit {
         return this.form.controls['groupId'];
     }
 
-    get userId(): AbstractControl {
-        return this.form.controls['userId'];
+    get paidByUserId(): AbstractControl {
+        return this.form.controls['paidByUserId'];
     }
 
     constructor(
@@ -41,24 +40,24 @@ export class ExpenseDialogComponent implements OnInit {
         public userService: UserService,
         private dialogRef: MatDialogRef<ExpenseDialogComponent>,
         private expenseService: ExpenseService
-    ) {}
-
-    ngOnInit(): void {
-        this.groupService
-            .getAllGroups()
-            .pipe(
-                switchMap((groups: GroupInterface[]) => {
-                    this.groups = groups;
-                    return this.groupId.valueChanges;
-                })
-            )
-            .subscribe((groupId: number) => {
-                this.users = this.groups?.find(group => group.id === +groupId)?.users;
-                this.userId.enable();
-            });
+    ) {
+        this.groups = this.groupService.getAllGroups();
     }
 
-    onSaveClicked(expense: ExpenseInterface): void {
+    ngOnInit(): void {
+        this.groupId.valueChanges.subscribe((groupId: number) => {
+            this.users = this.groups?.find(group => group.id === +groupId)?.users;
+            this.paidByUserId.enable();
+        });
+    }
+
+    onSaveClicked(values: ExpenseInterface): void {
+        const expense: ExpenseInterface = {
+            amount: values.amount,
+            name: values.name,
+            groupId: +values.groupId,
+            paidByUserId: +values.paidByUserId
+        };
         this.expenseService.createExpense(expense);
         this.dialogRef.close();
     }

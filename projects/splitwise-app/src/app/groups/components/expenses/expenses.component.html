@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between mb-5">
+  <h1>Expenses</h1>
+</div>
+<ng-container *ngIf="groupId">
+  <div class="card mb-4" *ngFor="let expense of expenseService.getAllExpensesByGroupId(groupId).reverse()">
+    <div class="card-body">
+      <p class="card-text">
+        <span class="fw-bold">{{ expense.paidByUser?.name }}</span> paid for
+        <span class="fw-bold">{{ expense.name }}</span> on <span class="fw-bold"> {{ formatDate(expense) }}</span>
+        <span class="color-green fw-bold ms-3">{{ expense.amount }}€</span>
+      </p>
+    </div>
+  </div>
+</ng-container>
