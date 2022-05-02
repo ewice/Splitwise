@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <h2 mat-dialog-title>Create a group</h2>
+  <h2 mat-dialog-title>Create a payment</h2>
   <mat-dialog-content class="mat-typography">
     <div class="mb-3">
       <label for="amount" class="form-label">Amount</label>
@@ -7,7 +7,7 @@
              [class.is-invalid]="amount.touched && amount.invalid">
     </div>
     <div class="mb-3">
-      <label for="paidUser" class="form-label">Paid by</label>
+      <label for="paidUser" class="form-label">Pay</label>
       <select id="paidUser"
               class="form-select"
               formControlName="paidUserId"
@@ -26,7 +26,7 @@
       </select>
     </div>
     <div class="mb-3">
-      <label for="paidByUser" class="form-label">Paid by</label>
+      <label for="paidByUser" class="form-label">By</label>
       <select id="paidByUser"
               class="form-select"
               formControlName="paidByUserId"

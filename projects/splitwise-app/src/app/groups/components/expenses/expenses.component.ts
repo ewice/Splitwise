@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseService } from 'splitwise';
 import { DateService } from '../../../shared/services/date.service';
-import { PaymentDialogComponent } from '../../../base/dialogs/payment-dialog/payment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ExpenseDialogComponent } from '../../../base/dialogs/expense-dialog/expense-dialog.component';
 
 @Component({
     selector: 'app-expenses',
@@ -28,7 +28,7 @@ export class ExpensesComponent implements OnInit {
     }
 
     onOpenDialogClicked(): void {
-        this.dialog.open(PaymentDialogComponent, {
+        this.dialog.open(ExpenseDialogComponent, {
             data: this.groupId
         });
     }
